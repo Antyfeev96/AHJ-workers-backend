@@ -1,5 +1,6 @@
 const http = require("http");
 const Koa = require("koa");
+const slow = require('koa-slow');
 const { v4: uuidv4 } = require('uuid');
 const Router = require("koa-router");
 const faker = require('faker');
@@ -28,6 +29,10 @@ const data = {
 }
 
 console.log(data);
+
+app.use(slow({
+  delay: 4000,
+}));
 
 app.use(async (ctx, next) => {
   const origin = ctx.request.get("Origin");
